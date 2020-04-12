@@ -1,0 +1,30 @@
+{
+  "name": "pages_together",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john95lee/pages_together.git"
+  },
+  "author": "John Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/john95lee/pages_together/issues"
+  },
+  "homepage": "https://github.com/john95lee/pages_together#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
+    "jquery": "^3.5.0",
+    "popper.js": "^1.16.1",
+    "sass": "^1.26.3",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
