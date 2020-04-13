@@ -7,7 +7,7 @@ border-radius: 2px;
 }
 
 #reader-window{
-    height: 400px;
+    height: 600px;
     overflow: auto;
     background: #f9f9f9;
 }

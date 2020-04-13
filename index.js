@@ -1,5 +1,6 @@
 var express = require('express');
 var socket = require('socket.io');
+var EPub = require("epub");
 
 // App setup
 var app = express();

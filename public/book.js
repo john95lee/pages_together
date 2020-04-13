@@ -9,7 +9,6 @@ var message = document.getElementById('message'),
     feedback = document.getElementById('feedback');
 
 //Event Listeners
-
 btn_submit.addEventListener('click', function(){
     console.log('button pressed');
 })
