@@ -1,5 +1,5 @@
 // Make Connection to websocket on server-side
-var socket = io.connect('http://localhost:4000');
+var socket = io.connect('http://localhost:8000');
 
 // Query DOM
 var message = document.getElementById('message'),
@@ -8,9 +8,16 @@ var message = document.getElementById('message'),
     reader_text = document.getElementById('reader-text'),
     feedback = document.getElementById('feedback');
 
+var bookname = "EdgarAllanPoe.epub";
+
 //Event Listeners
 btn_submit.addEventListener('click', function(){
-    console.log('button pressed');
+    socket.emit('load-book',{
+        book: message.value,
+        chapter: username.value
+    })
 })
 
-// Emit events
+socket.on('load-book',function(data){
+    reader_text.innerHTML = data;
+})
