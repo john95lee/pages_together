@@ -1,9 +1,18 @@
+@font-face{
+  font-family: goudy_bookletter;
+  src: ./fonts/Goudy_Bookletter_1911/GoudyBookletter1911-Regular.ttf;
+}
+
+p.epub-view{
+  color: #F9001D;
+}
+
 body {
   margin: 0;
-  background: #fafafa;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #ECEADC;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: Goudy_bookletter;
   color: #333;
-
   position: absolute;
   height: 100%;
   width: 100%;
@@ -26,31 +35,17 @@ body {
 
 #viewer.spreads {
   width: 900px;
-  height: 600px;
+  height: 500px;
   box-shadow: 0 0 4px #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 0;
   position: relative;
   margin: 10px auto;
   top: calc(50vh - 400px);
+
 }
 
 #viewer.spreads .epub-view > iframe {
-    background: white;
-}
-
-#viewer.scrolled {
-  overflow: hidden;
-  width: 800px;
-  margin: 0 auto;
-  position: relative;
-  background: url('ajax-loader.gif') center center no-repeat;
-  box-shadow: 0 0 4px #ccc;
-  padding: 20px;
-  background: white;
-}
-
-#viewer.scrolled .epub-view > iframe {
     background: white;
 }
 
@@ -100,7 +95,7 @@ body {
   top: 50%;
   margin-top: -32px;
   font-size: 64px;
-  color: #E2E2E2;
+  color: #A7A999;
   font-family: arial, sans-serif;
   font-weight: bold;
   cursor: pointer;
@@ -278,3 +273,9 @@ svg {
   stroke: #777;
   fill: #777;
 }
+
+.epub-container{
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #CED2BA;
+}
+
