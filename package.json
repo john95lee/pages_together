@@ -21,13 +21,17 @@
     "epubjs": "^0.3.85",
     "express": "^4.17.1",
     "jquery": "^3.5.0",
+    "jszip": "^3.3.0",
     "popper.js": "^1.16.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.1.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "readable-stream": "^3.6.0"
   }
 }
