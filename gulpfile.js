@@ -3,7 +3,6 @@ var sass = require('gulp-sass');
 var uglifycss = require('gulp-uglifycss');
 var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
-var htmlmin = require('gulp-html-minifier');
 
 //SASS to CSS
 function sassTask() {
@@ -26,10 +25,9 @@ function cssTask() {
         .pipe(gulp.dest('./public/css'));
 }
 
-//HTML minify with gulp-html-minifier
+//Move HTML from src folder to public folder
 function htmlTask() {
     return gulp.src('./src/html/*.html')
-        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('./public'))
 }
 
