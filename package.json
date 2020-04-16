@@ -18,7 +18,7 @@
   "homepage": "https://github.com/john95lee/pages_together#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "epub": "^1.2.0",
+    "epubjs": "^0.3.85",
     "express": "^4.17.1",
     "jquery": "^3.5.0",
     "popper.js": "^1.16.1",

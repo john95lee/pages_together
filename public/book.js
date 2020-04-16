@@ -21,3 +21,10 @@ btn_submit.addEventListener('click', function(){
 socket.on('load-book',function(data){
     reader_text.innerHTML = data;
 })
+
+var book = ePub("./epub/pg25525.epub");
+var rendition = book.renderTo(reader_text,{
+    width: 600,
+    height: 400
+});
+var displayed = rendition.display();
