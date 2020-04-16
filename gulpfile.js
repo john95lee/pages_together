@@ -2,8 +2,8 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var uglifycss = require('gulp-uglifycss');
 var uglify = require('gulp-uglify');
-var pipeline = require('readable-stream').pipeline;
 var browserSync = require('browser-sync').create();
+var htmlmin = require('gulp-html-minifier');
 
 //SASS to CSS
 function sassTask() {
@@ -26,6 +26,13 @@ function cssTask() {
         .pipe(gulp.dest('./public/css'));
 }
 
+//HTML minify with gulp-html-minifier
+function htmlTask() {
+    return gulp.src('./src/html/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./public'))
+}
+
 //Watch for changes and reload browser
 function watch() {
     browserSync.init({
@@ -36,6 +43,7 @@ function watch() {
     gulp.watch('./src/sass/*.scss', sassTask);
     gulp.watch('./src/js/*.js', jsTask);
     gulp.watch('./src/css/*.css', cssTask);
+    gulp.watch('./src/html/*.html', htmlTask);
     gulp.watch('./public/*.html').on('change', browserSync.reload);
     gulp.watch('./public/js/*.js').on('change', browserSync.reload);
     gulp.watch('./public/css/*.css').on('change', browserSync.reload);
@@ -44,4 +52,7 @@ function watch() {
 exports.sassTask = sassTask;
 exports.jsTask = jsTask;
 exports.cssTask = cssTask;
+exports.htmlTask = htmlTask;
+
 exports.watch = watch;
+exports.update = gulp.series(sassTask,jsTask,cssTask,htmlTask);

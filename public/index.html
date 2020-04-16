@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title id="title">Pages Together</title>
-    <link href="/css/main.css" rel="stylesheet"/>
-    <link href="/css/styles.css" rel="stylesheet"/>
-    <script src="/socket.io/socket.io.js"></script>
-
-    <!--Load resources for epub viewing-->
-    <script src="./js/jszip.min.js"></script>
-    <script src="./js/epub.min.js"></script>
-
-</head>
-<body>
-  <!-- <div id="title"></div> -->
-  <select id="toc"></select>
-  <div id="viewer" class="spreads"></div>
-  <a id="prev" href="#prev" class="arrow">‹</a>
-  <a id="next" href="#next" class="arrow">›</a>
-
-  <script>
-    var params = URLSearchParams && new URLSearchParams(document.location.search.substring(1));
+<!DOCTYPE html><html><head><title id="title">Pages Together</title><link href="/css/main.css" rel="stylesheet"><link href="/css/styles.css" rel="stylesheet"><script src="/socket.io/socket.io.js"></script><!--Load resources for epub viewing--><script src="./js/jszip.min.js"></script><script src="./js/epub.min.js"></script></head><body><!-- <div id="title"></div> --><select id="toc"></select><div id="viewer" class="spreads"></div><a id="prev" href="#prev" class="arrow">‹</a> <a id="next" href="#next" class="arrow">›</a><script>var params = URLSearchParams && new URLSearchParams(document.location.search.substring(1));
     var url = params && params.get("url") && decodeURIComponent(params.get("url"));
     var currentSectionIndex = (params && params.get("loc")) ? params.get("loc") : undefined;
 
@@ -146,12 +125,4 @@
                     return false;
             };
 
-        });
-
-
-
-
-  </script>
-
-</body>
-</html>
+        });</script></body></html>
