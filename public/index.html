@@ -146,7 +146,19 @@
                     return false;
             };
 
-        });
+    });
+
+    //Highlight selected text
+    rendition.on("selected", function(cfiRange, contents){
+        //console.log("highlight clicked", e.target);
+        console.log(cfiRange);
+        console.log("start cfi: ", rendition.location.start.cfi);
+        console.log("end cfi: ", rendition.location.end.cfi);
+        rendition.annotations.highlight(cfiRange,{}, (e) => {
+
+        })
+        contents.window.getSelection().removeAllRanges();
+    });
 
   </script>
 
