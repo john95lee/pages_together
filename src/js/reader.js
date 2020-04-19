@@ -9,63 +9,6 @@ var rendition = book.renderTo("viewer", {
 
 rendition.display();
 
-book.ready.then(function() {
-
-  var next = document.getElementById("next");
-
-  next.addEventListener("click", function(e){
-    book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
-    e.preventDefault();
-  }, false);
-
-  var prev = document.getElementById("prev");
-  prev.addEventListener("click", function(e){
-    book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
-    e.preventDefault();
-  }, false);
-
-  var keyListener = function(e){
-
-    // Left Key
-    if ((e.keyCode || e.which) == 37) {
-      book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
-    }
-
-    // Right Key
-    if ((e.keyCode || e.which) == 39) {
-      book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
-    }
-
-  };
-
-  rendition.on("keyup", keyListener);
-  document.addEventListener("keyup", keyListener, false);
-
-})
-
-var title = document.getElementById("title");
-
-rendition.on("rendered", function(section){
-  var current = book.navigation && book.navigation.get(section.href);
-
-  if (current) {
-    var $select = document.getElementById("toc");
-    var $selected = $select.querySelector("option[selected]");
-    if ($selected) {
-      $selected.removeAttribute("selected");
-    }
-
-    var $options = $select.querySelectorAll("option");
-    for (var i = 0; i < $options.length; ++i) {
-      let selected = $options[i].getAttribute("ref") === current.href;
-      if (selected) {
-        $options[i].setAttribute("selected", "");
-      }
-    }
-  }
-
-});
-
 rendition.on("relocated", function(location){
   console.log(location);
 
@@ -101,47 +44,96 @@ window.addEventListener("unload", function () {
   this.book.destroy();
 });
 
-var chapList = [];
+const getCfiFromHref = async (href) => {
+    const id = href.split('#')[1];
+    const item = book.spine.get(href);
+    await item.load(book.load.bind(book));
+    const el = id ? item.document.getElementById(id) : item.document.body;
+    return item.cfiFromElement(el);
+}
 
-book.loaded.navigation.then(function(toc){
+var chapNames = [];
+var chapCFI = [];
+
+book.loaded.navigation.then(function(toc, navPath){
   var $select = document.getElementById("toc"),
-          docfrag = document.createDocumentFragment();
+    docfrag = document.createDocumentFragment();
 
   toc.forEach(function(chapter) {
-    chapList.push(chapter);
-      var option = document.createElement("option");
-      option.textContent = chapter.label;
-      option.setAttribute("ref", chapter.href);
-      docfrag.appendChild(option);
+    var option = document.createElement("option");
+    option.textContent = chapter.label;
+    option.setAttribute("ref", chapter.href);
+
+    chapNames.push(chapter.label);
+
+    getCfiFromHref(chapter.href)
+      .then(function(value){
+        chapCFI.push(value);
+      })
+
+    docfrag.appendChild(option);
   });
 
   $select.appendChild(docfrag);
 
   $select.onchange = function(){
-          var index = $select.selectedIndex,
-                  url = $select.options[index].getAttribute("ref");
-          rendition.display(url);
-          return false;
+    var index = $select.selectedIndex,
+            url = $select.options[index].getAttribute("ref");
+    rendition.display(url);
+    return false;
   };
 
-  //Drawing chapter circles
-  function makeCircles() {
-
-    if (chapList.length < 2) then{
-      $("#line").hide();
-      $("#span").show().text(chapList[0].label);
-    }else if (chapList.length >= 2){
-      var first = chapList[0];
-      var last = chapList[chapList.length - 1];
-
-      var firstChapter = chapList.label;
-      var
-
-    }
-
+});
+/*
+if (chapNames.length == chapCFI.length){
+  var timeline = document.getElementById("timeline");
+  var i;
+  for (i=0; i < chapNames.length; i++){
+    timeline.innerHTML += "<div id=&quotchap"+i+"&quotclass=&quotmarker&quot data-toggle=&quottooltip&quot title=&quot"+chapNames[i]+"&quot style="left: 0%;"></div>"
   }
 
-});
+}
+*/
+console.log(chapNames);
+console.log((chapCFI));
+
+book.ready.then(function() {
+
+  var next = document.getElementById("next");
+
+  next.addEventListener("click", function(e){
+    book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
+    e.preventDefault();
+  }, false);
+
+  var prev = document.getElementById("prev");
+  prev.addEventListener("click", function(e){
+    book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
+    e.preventDefault();
+  }, false);
+
+  var keyListener = function(e){
+
+    // Left Key
+    if ((e.keyCode || e.which) == 37) {
+      book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
+    }
+
+    // Right Key
+    if ((e.keyCode || e.which) == 39) {
+      book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
+    }
+
+  };
+
+  rendition.on("keyup", keyListener);
+  document.addEventListener("keyup", keyListener, false);
+
+
+})
+
+  book.locations.generate(1000);
+  console.log(book.locations.percentageFromCfi("epubcfi(/6/6[chapter-1.xhtml]!/"));
 
 //Highlight selected text
 rendition.on("selected", function(cfiRange, contents){
@@ -150,8 +142,23 @@ rendition.on("selected", function(cfiRange, contents){
     console.log("start cfi: ", rendition.location.start.cfi);
     console.log("end cfi: ", rendition.location.end.cfi);
     rendition.annotations.highlight(cfiRange,{}, (e) => {
-
     })
     contents.window.getSelection().removeAllRanges();
 });
 
+//JQuery
+$(function(){
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
+  $(".circle").mouseenter(function() {
+    $(this).addClass("hover");
+  });
+
+  $(".circle").mouseleave(function() {
+    $(this).removeClass("hover");
+  });
+
+});

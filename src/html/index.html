@@ -6,24 +6,40 @@
     <link href="/css/styles.css" rel="stylesheet"/>
     <script src="/socket.io/socket.io.js"></script>
 
+    <!--Load JQuery, Popper, Bootstrap-->
+    <script src="./js/imported/jquery.min.js"></script>
+    <script src="./js/imported/popper.min.js"></script>
+    <script src="./js/imported/bootstrap.bundle.min.js"></script>
+
     <!--Load resources for epub viewing-->
-    <script src="./js/jszip.min.js"></script>
-    <script src="./js/epub.min.js"></script>
+    <script src="./js/imported/jszip.min.js"></script>
+    <script src="./js/imported/epub.min.js"></script>
+
+    <!--Bootstrap JS-->
+
 
 </head>
 <body>
   <!-- <div id="title"></div> -->
   <select id="toc"></select>
   <div id="viewer" class="spreads"></div>
+
+  <!--Chapter Selection through timeline-->
+  <div id="timeline">
+
+    <div id="circle0" class="marker" data-toggle="tooltip" title="Chapter0" style="left: 0%;"></div>
+    <div id="circle1" class="marker" data-toggle="tooltip" title="Chapter1" style="left: 10%;"></div>
+
+  </div>
+
   <a id="prev" href="#prev" class="arrow">‹</a>
   <a id="next" href="#next" class="arrow">›</a>
 
-  <div id="timeline">
-      <div id="line"></div>
-      <div id="span">Date Placeholder</div>
-  </div>
+
+
 
   <script src="./js/reader.js"></script>
 
 </body>
+
 </html>

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/john95lee/pages_together#readme",
   "dependencies": {
+    "@popperjs/core": "^2.3.3",
     "bootstrap": "^4.4.1",
     "epubjs": "^0.3.85",
     "express": "^4.17.1",
